@@ -1,8 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
 
-    const tabs = document.querySelectorAll('.tabheader__item'),
-          tabsContent = document.querySelectorAll('.tabcontent'),
-          tabsParent = document.querySelector('.tabheader__items');
+    const tabs = document.querySelectorAll('.tabheader__item'),//псевдомассив  с элементами меню
+          tabsContent = document.querySelectorAll('.tabcontent'),// описание каждого меню
+          tabsParent = document.querySelector('.tabheader__items');// родитель всех элементов меню
           //скроем ненужные нам табы 7,20
     function hideTadContent() { //этой функцией мы скроем весь контент на сайте
         tabsContent.forEach(item => {

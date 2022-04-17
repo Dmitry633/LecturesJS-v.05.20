@@ -1,6 +1,6 @@
-//45 Функции конструкторы
+// ?45 Функции конструкторы
 'use strict';
-
+/*
 //Э длинный синтаксис для создания типов данных (начинается с ключ слова New)
 const num = new Function(3);//устаревший синтаксис - создали новую ф-цию, если такатя ф будет
 //содержать методы и свойства, то она нам создаст  оюъект
@@ -31,6 +31,22 @@ User.prototype.exit = function() {
 ivan.exit();
 //ТО конструкторы нам нужны для создания однотипных объектов
 //Все что было выше было по стандарту ES5
+*/
+class User {
+    constructor(name, id) {
+        this.name = name;
+        this.id = id;
+        this.human = true;
 
-
+    }
+    hello() {
+        console.log(`Hello! ${this.name}`)
+    }
+    exit() {
+        console.log(`Пользователь ${this.name} ушел`)
+    }
+}
+const ivan = new User('Ivan', 25);
+ivan.hello();
+console.log(ivan.hello());
  

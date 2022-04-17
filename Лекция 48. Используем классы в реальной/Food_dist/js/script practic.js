@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     })
 //Timer
-    const deadline = '2021-08-11';//перерменная дэдлайна
+    const deadline = '2022-08-11';//перерменная дэдлайна
 
     function getTimeRemaning(endtime) { //фция определяющая разницу м ду дэдлайном  и текущим времпенем
         const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //             document.body.style.overflow = 'hidden';//для исключения прокрытки фона
     //         });
     //     });
-  
+
         function openModal() {
             modal.classList.add('show');
             modal.classList.remove('hide');
@@ -147,7 +147,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     //44. Модификации  модалки
     //чтобы модалка появлялась через кое-то время:
-    const modalTimerId = setTimeout(openModal, 3000);
+    //const modalTimerId = setTimeout(openModal, 3000);
     
 
     //чьлюы модалка открылась при долистывании до конца странициы:
@@ -160,12 +160,75 @@ window.addEventListener('DOMContentLoaded', () => {
     // }, {once: true});//добавлена настройка обработчика событий {once: true} - событие будет срабатывать толко один раз, но со скроллом работать не будет, поэтому воспольхуемя removeEventListener
 
     function showModakByScroll() {
-        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) {// не работало, т к опечатался и не соблел регистр// отняяли один пиксель т к не на всех браузерах/мониторах срабатывает
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {// не работало, т к опечатался и не соблел регистр
             openModal();
             window.removeEventListener('scroll', showModakByScroll);
         };
     }
 
     //чьлюы модалка открылась при долистывании до конца странициы:
-    window.addEventListener('scroll', showModakByScroll);//добавлена настройка обработчика событий {once: true} - событие будет срабатывать толко один раз, но со скроллом работать не будет
+    window.addEventListener('scroll', showModakByScroll);
+
+    //Используем классы для карточек
+   class MenuCard {
+       constructor (src, alt, title, descr, price, parentSelector) {
+           this.src = src;
+           this.alt = alt;
+           this.title = title;
+           this.descr = descr;
+           this.price = price;
+           this.transfer = 27;
+           this.changeToUAH();
+           this.parent = document.querySelector(parentSelector);
+       }
+       changeToUAH() {
+           this.price = this.price * this.transfer;
+       }
+       
+       render() {
+           const element = document.createElement('div');
+           element.innerHTML = `
+           <div class="menu__item">
+                    <img src=${this.src} alt=${this.alt}>
+                        <h3 class="menu__item-subtitle">${this.title}</h3>
+                        <div class="menu__item-descr">${this.descr}</div>
+                        <div class="menu__item-divider"></div>
+                        <div class="menu__item-price">
+                            <div class="menu__item-cost">Цена:</div>
+                            <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                        </div>
+           `;
+           this.parent.append(element);
+       }
+
+    
+       
+   }
+   new MenuCard (
+    "img/tabs/vegy.jpg",
+    "vegy",
+    'Меню "Фитнес"',
+    'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+    9,
+    '.menu .container'
+
+   ).render();
+   new MenuCard (
+    "img/tabs/vegy.jpg",
+    "vegy",
+    'Меню "Фитнес"',
+    'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+    9,
+    '.menu .container'
+
+   ).render();
+   new MenuCard (
+    "img/tabs/vegy.jpg",
+    "vegy",
+    'Меню "Фитнес"',
+    'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+    9,
+    '.menu .container'
+
+   ).render();
 });
